@@ -22,15 +22,19 @@
  * @copyright   2023 Anna <zhavridana7@gmail.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+namespace local_greetings\form;
 defined('MOODLE_INTERNAL') || die();
-$string['pluginname'] = 'Hi';
+require_once($CFG->libdir . '/formslib.php');
+class message_form extends \moodleform {
+    /**
+     * Define the form.
+     */
+    public function definition() {
+        $mform = $this->_form; // Don't forget the underscore!
+        $mform->addElement('textarea', 'message', get_string('yourmessage', 'local_greetings'));
+        $mform->setType('message', PARAM_TEXT);
 
-$string['greetinguser'] = 'Hi, user.';
-$string['greetingloggedinuser'] = 'Hi, {$a}.';
-
-$string['greetinguserau'] = 'Hello, {$a}.';
-$string['greetinguseres'] = 'Hola, {$a}.';
-$string['greetinguserfj'] = 'Bula, {$a}.';
-$string['greetingusernz'] = 'Kia Ora, {$a}.';
-
-$string['yourmessage'] = 'Ваше сообщение';
+        $submitlabel = get_string('submit');
+        $mform->addElement('submit', 'submitmessage', $submitlabel);
+    }
+}
