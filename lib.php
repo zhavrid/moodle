@@ -22,13 +22,19 @@
  * @copyright   2023 Anna <zhavridana7@gmail.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-defined('MOODLE_INTERNAL') || die();
-$string['pluginname'] = 'Hi';
 
-$string['greetinguser'] = 'Hi, user.';
-$string['greetingloggedinuser'] = 'Hi, {$a}.';
-
-$string['greetinguserau'] = 'Hello, {$a}.';
-$string['greetinguseres'] = 'Hola, {$a}.';
-$string['greetinguserfj'] = 'Bula, {$a}.';
-$string['greetingusernz'] = 'Kia Ora, {$a}.';
+function local_greetings_get_greeting($user) {
+    if ($user == null) {
+        return get_string('greetinguser', 'local_greetings');
+    }
+    $country = $user->country;
+    switch ($country) {
+        case 'ES':
+            $langstr = 'greetinguseres';
+        break;
+        default:
+            $langstr = 'greetingloggedinuser';
+        break;
+    }
+    return get_string($langstr, 'local_greetings', fullname($user));
+}
