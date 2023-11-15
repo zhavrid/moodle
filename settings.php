@@ -21,9 +21,19 @@
  * @copyright   2023 Anna <zhavridana7@gmail.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 defined('MOODLE_INTERNAL') || die();
-$plugin->component = 'local_greetings';
-$plugin->release = '0.1.0';
-$plugin->version = 2023111800;
-$plugin->requires = 2022112800;
-$plugin->maturity = MATURITY_ALPHA;
+
+if ($hassiteconfig) {
+    $settings = new admin_settingpage('local_greetings', get_string('pluginname', 'local_greetings'));
+    $ADMIN->add('localplugins', $settings);
+    if ($ADMIN->fulltree) {
+        require_once($CFG->dirroot . '/local/greetings/lib.php');
+        $settings->add(new admin_setting_configtext(
+            'local_greetings/messagecardbgcolor',
+            get_string('messagecardbgcolor', 'local_greetings'),
+            get_string('messagecardbgcolordesc', 'local_greetings'),
+            '#FFE0B2',
+        ));
+    }
+}
