@@ -34,6 +34,9 @@ $string['greetinguserfj'] = 'Bula, {$a}.';
 $string['greetingusernz'] = 'Kia Ora, {$a}.';
 
 $string['yourmessage'] = 'Ваше сообщение';
+$string['editmessage'] = 'Edit message';
+$string['norecordfound'] = 'No record found!';
+$string['cannoteditmessage'] = 'You cannot edit this message';
 $string['postedby'] = 'Posted by {$a}.';
 
 $string['greetings:viewmessages'] = 'View messages on the Greetings wall';
